@@ -1,6 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 
-import { Container, MonthView } from './styles';
+import { Container, MonthView, Day } from './styles';
 
 const WEEK_DAYS = [
   'Sunday',
@@ -12,7 +13,26 @@ const WEEK_DAYS = [
   'Saturday'
 ];
 
+const DISPLAYED_DAYS = 42;
+
 const Calendar: React.FC = () => {
+  const currentDate = moment();
+
+  var monthDays = [];
+
+  const firstWeekDayOfMonth = moment().date(1).day();
+
+  let day = moment().date(1 - firstWeekDayOfMonth);
+
+  for (let i = 0; i < DISPLAYED_DAYS; i++) {
+    monthDays.push(
+      <div key={day.toString()}>
+        <Day>{day.date()}</Day>
+      </div>
+    );
+    day.add(1, 'days');
+  }
+
   return (
     <Container>
       <MonthView>
@@ -23,7 +43,7 @@ const Calendar: React.FC = () => {
         </header>
 
         <main>
-
+          {monthDays}
         </main>
       </MonthView>
     </Container>

@@ -26,6 +26,16 @@ export const MonthView = styled.div`
   main {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    grid-gap: 1px;
+    background: #ccc;
+    border: 1px solid #ccc;
   }
 
+`;
+
+export const Day = styled.div`
+  height: 5rem;
+  padding: 0.5rem;
+  background: #fff;
+  font-size: 0.8rem;
 `;
