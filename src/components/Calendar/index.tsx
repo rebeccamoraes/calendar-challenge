@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
+import Modal from 'react-modal';
 
-import { Container, MonthView, Day } from './styles';
+import {
+  Container,
+  MonthView,
+  Day,
+  AddReminderButton
+} from './styles';
+import ReminderForm from '../ReminderForm';
 
 const WEEK_DAYS = [
   'Sunday',
@@ -15,7 +22,11 @@ const WEEK_DAYS = [
 
 const DISPLAYED_DAYS = 42;
 
+Modal.setAppElement('#root');
+
 const Calendar: React.FC = () => {
+  const [showAddReminderForm, setShowAddReminderForm] = useState(true);
+
   const currentDate = moment();
 
   var monthDays = [];
@@ -38,8 +49,19 @@ const Calendar: React.FC = () => {
     day.add(1, 'days');
   }
 
+  function openModal() {
+    setShowAddReminderForm(true);
+  }
+
+  function closeModal() {
+    setShowAddReminderForm(false);
+  }
+
   return (
     <Container>
+      <AddReminderButton onClick={openModal}>
+        + New Reminder
+      </AddReminderButton>
       <MonthView>
         <header>
           {WEEK_DAYS.map((weekDay) => (
@@ -51,6 +73,15 @@ const Calendar: React.FC = () => {
           {monthDays}
         </main>
       </MonthView>
+
+      <Modal
+        isOpen={showAddReminderForm}
+        onRequestClose={closeModal}
+        contentLabel="Create new reminder"
+        className="create-reminder-modal"
+      >
+        <ReminderForm />
+      </Modal>
     </Container>
   );
 }

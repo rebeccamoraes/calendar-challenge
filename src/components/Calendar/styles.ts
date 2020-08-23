@@ -14,6 +14,15 @@ export const Container = styled.div`
   padding: 10px;
 `;
 
+export const AddReminderButton = styled.button`
+  border: 1px solid #0070c0;
+  height: 2rem;
+  width: 10rem;
+  border-radius: 5px;
+  color: #0070c0;
+  background: #fff;
+`;
+
 export const MonthView = styled.div`
   margin: 20px;
 
