@@ -26,9 +26,14 @@ const Calendar: React.FC = () => {
 
   for (let i = 0; i < DISPLAYED_DAYS; i++) {
     monthDays.push(
-      <div key={day.toString()}>
-        <Day>{day.date()}</Day>
-      </div>
+      <Day
+        key={day.toString()}
+        isWeekend={day.day() === 0 || day.day() === 6}
+        sameMonth={day.month() === currentDate.month()}
+        currentDay={day.isSame(currentDate)}
+      >
+        <strong>{day.date()}</strong>
+      </Day>
     );
     day.add(1, 'days');
   }
