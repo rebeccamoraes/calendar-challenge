@@ -2,7 +2,7 @@
 A calendar application for saving reminders.
 
 ## Techs
-ReacjJS, TypeScript, Styled Components
+ReactJS, TypeScript, Styled Components
 
 ## Prerequisites
 - Node
