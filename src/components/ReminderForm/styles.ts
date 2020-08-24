@@ -20,7 +20,7 @@ export const Container = styled.div`
     label {
       margin-bottom: 10px;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
 
       input {
@@ -37,6 +37,13 @@ export const Container = styled.div`
       border-radius: 5px;
       height: 2rem;
       color: #fff;
+      margin-bottom: 2px;
+    }
+
+    button.secondary {
+      background: #fff;
+      border: 1px solid #ccc;
+      color: #333;
     }
   }
 `;
