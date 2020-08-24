@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import Modal from 'react-modal';
+
+import ReminderItem, { Reminder } from '../Reminder';
 
 import {
   Container,
@@ -26,6 +28,15 @@ Modal.setAppElement('#root');
 
 const Calendar: React.FC = () => {
   const [showAddReminderForm, setShowAddReminderForm] = useState(false);
+  const [reminders, setReminders] = useState([]);
+
+  useEffect(() => {
+    const storedReminders = localStorage.getItem('@mycalendar/reminders');
+
+    if (storedReminders) {
+      setReminders(JSON.parse(storedReminders));
+    }
+  }, [showAddReminderForm]);
 
   const currentDate = moment();
 
@@ -36,6 +47,21 @@ const Calendar: React.FC = () => {
   let day = moment().date(1 - firstWeekDayOfMonth);
 
   for (let i = 0; i < DISPLAYED_DAYS; i++) {
+    const dayReminders = reminders.filter((reminder: Reminder) => {
+      const date = moment(reminder.date);
+      return day.isSame(date, 'day');
+    });
+
+    dayReminders.sort((reminder1: Reminder, reminder2: Reminder) => {
+      if (reminder1.time === reminder2.time) {
+        return 0;
+      } else if (reminder1.time < reminder2.time) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
     monthDays.push(
       <Day
         key={day.toString()}
@@ -44,6 +70,11 @@ const Calendar: React.FC = () => {
         currentDay={day.isSame(currentDate)}
       >
         <strong>{day.date()}</strong>
+        <div className="reminders">
+          {dayReminders.map((reminder: Reminder) => {
+            return <ReminderItem reminder={reminder} />;
+          })}
+        </div>
       </Day>
     );
     day.add(1, 'days');
