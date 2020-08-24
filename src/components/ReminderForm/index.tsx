@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 
 import { Container } from './styles';
 
-const ReminderForm: React.FC = () => {
+interface ReminderFormProps {
+  closeForm: Function;
+}
+
+const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -11,12 +15,30 @@ const ReminderForm: React.FC = () => {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log({
+
+    let reminders = [];
+
+    const reminder = {
       title,
       date,
       time,
       city
-    });
+    }
+
+    reminders.push(reminder);
+
+    const storedReminders = localStorage.getItem('@mycalendar/reminders');
+
+    if (storedReminders) {
+      reminders = [...JSON.parse(storedReminders), ...reminders];
+    }
+
+    localStorage.setItem('@mycalendar/reminders', JSON.stringify(reminders));
+
+    alert("Reminder created!");
+    //TODO: add and show toast message
+
+    closeForm();
   }
 
   return (

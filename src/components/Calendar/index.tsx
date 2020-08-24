@@ -25,7 +25,7 @@ const DISPLAYED_DAYS = 42;
 Modal.setAppElement('#root');
 
 const Calendar: React.FC = () => {
-  const [showAddReminderForm, setShowAddReminderForm] = useState(true);
+  const [showAddReminderForm, setShowAddReminderForm] = useState(false);
 
   const currentDate = moment();
 
@@ -80,7 +80,7 @@ const Calendar: React.FC = () => {
         contentLabel="Create new reminder"
         className="create-reminder-modal"
       >
-        <ReminderForm />
+        <ReminderForm closeForm={closeModal} />
       </Modal>
     </Container>
   );
