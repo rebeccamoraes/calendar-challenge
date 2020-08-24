@@ -5,17 +5,18 @@ interface ReminderProps {
   color?: string;
 }
 
-export const Container = styled.div<ReminderProps>`
+export const Container = styled.button<ReminderProps>`
   background: ${props => props.color || "#0070c0"};
   color: ${props => props.color ? readableColor(props.color) : "#fff"};
   height: 1rem;
   margin: 2px 0;
   padding: 0 3px;
+  border: 0;
   border-radius: 3px;
   display: flex;
+  width: 100%;
   align-items: center;
   max-width: 7rem;
-  cursor: pointer;
   
   p {
 
