@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-modal": "^3.10.6",
     "@types/uuid": "^8.3.0",
+    "axios": "^0.20.0",
     "moment": "^2.27.0",
     "polished": "^3.6.5",
     "react": "^16.13.1",
