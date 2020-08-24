@@ -72,7 +72,12 @@ const Calendar: React.FC = () => {
         <strong>{day.date()}</strong>
         <div className="reminders">
           {dayReminders.map((reminder: Reminder) => {
-            return <ReminderItem reminder={reminder} />;
+            return (
+              <ReminderItem
+                key={reminder.time + reminder.title}
+                reminder={reminder}
+              />
+            );
           })}
         </div>
       </Day>
