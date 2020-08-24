@@ -103,13 +103,6 @@ const UpdateReminderForm: React.FC<ReminderFormProps> = ({
         <button type="submit">
           Save
         </button>
-        <button
-          type="button"
-          className="secondary"
-          onClick={() => closeForm()}
-        >
-          Cancel
-        </button>
       </form>
     </Container>
   );
