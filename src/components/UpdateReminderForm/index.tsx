@@ -69,13 +69,14 @@ const UpdateReminderForm: React.FC<ReminderFormProps> = ({
           <input
             type="date"
             value={date}
+            required
             onChange={(e) => setDate(e.target.value)}
           />
         </label>
         <label>
           Time:
           <input
-            type="text"
+            type="time"
             value={time}
             required
             onChange={(e) => setTime(e.target.value)}

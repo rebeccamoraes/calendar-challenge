@@ -56,6 +56,7 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
             type="text"
             value={title}
             required
+            maxLength={30}
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
@@ -64,13 +65,14 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
           <input
             type="date"
             value={date}
+            required
             onChange={(e) => setDate(e.target.value)}
           />
         </label>
         <label>
           Time:
           <input
-            type="text"
+            type="time"
             value={time}
             required
             onChange={(e) => setTime(e.target.value)}

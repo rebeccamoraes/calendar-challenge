@@ -17,9 +17,9 @@ export const Container = styled.button<ReminderProps>`
   width: 100%;
   align-items: center;
   max-width: 7rem;
+  overflow: hidden;
   
   p {
-
     span.time {
       font-size: 0.7rem;
       margin-right: 3px;
