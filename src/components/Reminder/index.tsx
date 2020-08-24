@@ -7,6 +7,7 @@ export interface Reminder {
   date: string;
   time: string;
   city: string;
+  color?: string;
 }
 
 interface ReminderProps {
@@ -15,7 +16,7 @@ interface ReminderProps {
 
 const ReminderItem: React.FC<ReminderProps> = ({ reminder }) => {
   return (
-    <Container>
+    <Container color={reminder.color}>
       <p>
         <span className="time">{reminder.time}</span>
         <span className="title">{reminder.title}</span>

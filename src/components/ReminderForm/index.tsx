@@ -11,7 +11,7 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [city, setCity] = useState("");
-  // const [color, setColor] = useState("");
+  const [color, setColor] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -22,7 +22,8 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
       title,
       date,
       time,
-      city
+      city,
+      color
     }
 
     reminders.push(reminder);
@@ -76,6 +77,14 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
+          />
+        </label>
+        <label>
+          Color:
+          <input
+            type="text"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
           />
         </label>
 
