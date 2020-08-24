@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { GithubPicker } from 'react-color';
+
+import { Reminder } from '../Reminder';
 
 import { Container } from './styles';
 
 interface ReminderFormProps {
   closeForm: Function;
+  reminder: Reminder;
+  setReminder: Function;
 }
 
-const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [city, setCity] = useState("");
-  const [color, setColor] = useState("");
+const UpdateReminderForm: React.FC<ReminderFormProps> = ({
+  closeForm, reminder, setReminder
+}) => {
+  const [title, setTitle] = useState(reminder.title);
+  const [date, setDate] = useState(reminder.date);
+  const [time, setTime] = useState(reminder.time);
+  const [city, setCity] = useState(reminder.city);
+  const [color, setColor] = useState(reminder.color);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    let reminders = [];
+    let reminders = new Array<Reminder>();
 
-    const reminder = {
-      id: uuidv4(),
+    const updatedReminder = {
+      id: reminder.id,
       title,
       date,
       time,
@@ -29,25 +34,25 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
       color
     }
 
-    reminders.push(reminder);
-
     const storedReminders = localStorage.getItem('@mycalendar/reminders');
 
     if (storedReminders) {
-      reminders = [...JSON.parse(storedReminders), ...reminders];
+      reminders = JSON.parse(storedReminders);
+      reminders = reminders.filter((item: Reminder) => item.id !== reminder.id);
     }
 
-    localStorage.setItem('@mycalendar/reminders', JSON.stringify(reminders));
+    reminders.push(updatedReminder);
 
+    localStorage.setItem('@mycalendar/reminders', JSON.stringify(reminders));
+    setReminder(updatedReminder);
     closeForm();
 
-    alert("Reminder created!");
     //TODO: add and show toast message
   }
 
   return (
     <Container>
-      <h2>Create new reminder</h2>
+      <h2>Update reminder</h2>
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>
@@ -110,4 +115,4 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
   );
 }
 
-export default ReminderForm;
+export default UpdateReminderForm;
