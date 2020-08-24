@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GithubPicker } from 'react-color';
 
 import { Container } from './styles';
 
@@ -15,7 +16,7 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
+    console.log(color);
     let reminders = [];
 
     const reminder = {
@@ -36,10 +37,10 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
 
     localStorage.setItem('@mycalendar/reminders', JSON.stringify(reminders));
 
+    closeForm();
+
     alert("Reminder created!");
     //TODO: add and show toast message
-
-    closeForm();
   }
 
   return (
@@ -52,6 +53,7 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
           <input
             type="text"
             value={title}
+            required
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
@@ -68,6 +70,7 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
           <input
             type="text"
             value={time}
+            required
             onChange={(e) => setTime(e.target.value)}
           />
         </label>
@@ -76,20 +79,29 @@ const ReminderForm: React.FC<ReminderFormProps> = ({ closeForm }) => {
           <input
             type="text"
             value={city}
+            required
             onChange={(e) => setCity(e.target.value)}
           />
         </label>
         <label>
           Color:
-          <input
-            type="text"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
+          <GithubPicker
+            width="17rem"
+            triangle="hide"
+            color={color}
+            onChange={(selectedColor) => setColor(selectedColor.hex)}
           />
         </label>
 
         <button type="submit">
           Save
+        </button>
+        <button
+          type="button"
+          className="secondary"
+          onClick={() => closeForm()}
+        >
+          Cancel
         </button>
       </form>
     </Container>
