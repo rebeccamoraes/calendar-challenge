@@ -6,11 +6,27 @@ import ReminderItem, { Reminder } from '../Reminder';
 
 import {
   Container,
+  MonthPicker,
   MonthView,
   Day,
   AddReminderButton
 } from './styles';
 import ReminderForm from '../ReminderForm';
+
+const MONTH_NAME = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'Seteptember',
+  'October',
+  'November',
+  'December',
+];
 
 const WEEK_DAYS = [
   'Sunday',
@@ -27,6 +43,10 @@ const DISPLAYED_DAYS = 42;
 Modal.setAppElement('#root');
 
 const Calendar: React.FC = () => {
+  const currentDate = moment();
+
+  const [selectedMonth, setSelectedMonth] = useState(currentDate.month());
+  const [selectedYear, setSelectedYear] = useState(currentDate.year());
   const [showAddReminderForm, setShowAddReminderForm] = useState(false);
   const [reminders, setReminders] = useState([]);
 
@@ -38,8 +58,9 @@ const Calendar: React.FC = () => {
     }
   }, [showAddReminderForm]);
 
-  const currentDate = moment();
-
+  /**
+   * Fill the monthDays array with the displayed days of the selected month
+   */
   var monthDays = [];
 
   const firstWeekDayOfMonth = moment().date(1).day();
@@ -98,6 +119,11 @@ const Calendar: React.FC = () => {
       <AddReminderButton onClick={openModal}>
         + New Reminder
       </AddReminderButton>
+
+      <MonthPicker>
+        <h2>{`${MONTH_NAME[selectedMonth]}, ${selectedYear}`}</h2>
+      </MonthPicker>
+
       <MonthView>
         <header>
           {WEEK_DAYS.map((weekDay) => (
