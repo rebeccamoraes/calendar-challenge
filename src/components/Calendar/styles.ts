@@ -23,6 +23,10 @@ export const AddReminderButton = styled.button`
   background: #fff;
 `;
 
+export const MonthPicker = styled.header`
+  margin-top: 10px;
+`;
+
 export const MonthView = styled.div`
   margin: 20px;
 
